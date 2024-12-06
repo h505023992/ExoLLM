@@ -16,12 +16,13 @@ root_path_name=./dataset/
 data_path_name=ETTh1.csv
 model_id_name=ETTh1
 data_name=ETTh1
-
+dropout=0.3
 random_seed=2021
 bs=256
 lr=1e-4
 pred_len=96
 loss=mae
+for lr in 1e-4 5e-4 1e-3 5e-3; do
 for pred_len in 96 192 336 720; do
     python -u run_longExp.py \
         --random_seed $random_seed \
@@ -48,4 +49,5 @@ for pred_len in 96 192 336 720; do
         --use_multi_gpu \
         --devices 4,5 \
         --itr 1 >$dir/$model_id_name'_'$seq_len'_'${pred_len}'_'${bs}'_'${lr}_${dropout}_${loss}.log 
+done
 done

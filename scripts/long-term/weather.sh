@@ -20,9 +20,10 @@ data_name=weather
 
 random_seed=2021
 bs=256
-lr=1e-4
+dropout=0.3
+lr=1e-3
 loss=mae
-for pred_len in 96 192 336 720; do
+for pred_len in 336 720; do
 python -u run_longExp.py \
     --random_seed $random_seed \
     --is_training 1 \

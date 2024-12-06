@@ -17,11 +17,12 @@ data_path_name=electricity.csv
 model_id_name=Electricity
 data_name=electricity
 random_seed=2021
-bs=256
+bs=12
 lr=1e-4
 loss=mae
-
-for pred_len in 96 192 336 720; do
+dropout=0.3
+for lr in 1e-4 5e-4 1e-3 5e-3; do
+for pred_len in 720 336 192 96; do
     python -u run_longExp.py \
         --random_seed $random_seed \
         --is_training 1 \
@@ -36,15 +37,14 @@ for pred_len in 96 192 336 720; do
         --enc_in 321 \
         --dropout $dropout \
         --e_layers 6 \
-        --batch_size $bs \
+        --batch_size 3852 \
         --learning_rate $lr \
         --loss $loss \
         --d_model 768 \
         --des 'Exp' \
         --patience 5 \
         --train_epochs 30 \
-        --gpu 5 \
-        --use_multi_gpu \
-        --devices 0,1,2,3 \
+        --gpu 0 \
         --itr 1 >$dir/$model_id_name'_'$seq_len'_'${pred_len}'_'${bs}'_'${lr}_${dropout}_${loss}.log 
+done
 done

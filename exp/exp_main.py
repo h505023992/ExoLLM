@@ -107,7 +107,7 @@ class Exp_Main(Exp_Basic):
                                             pct_start = self.args.pct_start,
                                             epochs = self.args.train_epochs,
                                             max_lr = self.args.learning_rate)
-        
+        max_memory=-1
         for epoch in range(self.args.train_epochs):
             iter_count = 0
             train_loss = []
@@ -151,7 +151,9 @@ class Exp_Main(Exp_Basic):
                 if self.args.lradj == 'TST':
                     adjust_learning_rate(model_optim, scheduler, epoch + 1, self.args, printout=False)
                     scheduler.step()
-
+                # current_memory = torch.cuda.max_memory_allocated(device=self.device) / 1024 ** 2
+                # max_memory = max(max_memory, current_memory)
+                # print(f"Max Memory (MB): {max_memory}")
             print("Epoch: {} cost time: {}".format(epoch + 1, time.time() - epoch_time))
             train_loss = np.average(train_loss)
             vali_loss = self.vali(vali_data, vali_loader, criterion)

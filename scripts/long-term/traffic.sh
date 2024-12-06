@@ -22,6 +22,8 @@ loss=mse
 dropout=0.3
 bs=24
 lr=1e-4
+dropout=0.3
+for lr in 1e-4 5e-4 1e-3 5e-3; do
 for pred_len in 96 192 336 720; do
     python -u run_longExp.py \
         --random_seed $random_seed \
@@ -48,4 +50,5 @@ for pred_len in 96 192 336 720; do
         --use_multi_gpu \
         --devices 0,1,2,3 \
         --itr 1 >$dir/$model_id_name'_'$seq_len'_'${pred_len}'_'${bs}'_'${lr}_${dropout}_${loss}.log 
+done
 done
