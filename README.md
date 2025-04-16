@@ -38,5 +38,3 @@ mae: 0.02340604753792286
 ```
 
 ------
-
-We will fully open-source the code once the paper is accepted.

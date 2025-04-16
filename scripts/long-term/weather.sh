@@ -23,7 +23,7 @@ bs=256
 dropout=0.3
 lr=1e-3
 loss=mae
-for pred_len in 336 720; do
+for pred_len in 96 ; do
 python -u run_longExp.py \
     --random_seed $random_seed \
     --is_training 1 \
